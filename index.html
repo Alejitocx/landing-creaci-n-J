@@ -16,6 +16,38 @@
       .font-handwriting {
         font-family: 'Dancing Script', cursive;
       }
+      
+      @keyframes float {
+        0% {
+          transform: translateY(0) rotate(0deg);
+          opacity: 0;
+        }
+        10% {
+          opacity: 0.5;
+        }
+        90% {
+          opacity: 0.5;
+        }
+        100% {
+          transform: translateY(-120vh) rotate(360deg);
+          opacity: 0;
+        }
+      }
+      
+      .animate-float {
+        animation-name: float;
+        animation-timing-function: linear;
+        animation-iteration-count: infinite;
+      }
+      
+      /* Utilities for fading in elements */
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      .animate-fade-in-up {
+        animation: fadeIn 1.5s ease-out forwards;
+      }
     </style>
   <script type="importmap">
 {

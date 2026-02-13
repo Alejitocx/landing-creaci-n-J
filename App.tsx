@@ -1,5 +1,5 @@
 import React from 'react';
-import { Scene3D } from './components/Scene3D';
+import { Background } from './components/Background';
 import { Proposal } from './components/Proposal';
 import { PoemGenerator } from './components/PoemGenerator';
 import { HeartIcon, StarIcon } from '@heroicons/react/24/solid';
@@ -13,7 +13,7 @@ const Section: React.FC<{ children: React.ReactNode; className?: string }> = ({ 
 const App: React.FC = () => {
   return (
     <div className="relative w-full min-h-screen overflow-x-hidden text-gray-800 selection:bg-rose-200">
-      <Scene3D />
+      <Background />
       
       {/* Intro Section - Added gradient background to highlight */}
       <Section className="bg-gradient-to-b from-rose-100/80 via-white/60 to-transparent backdrop-blur-sm">
