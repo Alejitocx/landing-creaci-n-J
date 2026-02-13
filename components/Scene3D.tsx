@@ -1,6 +1,6 @@
 import React, { useRef, useState, useMemo } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { Float, Environment } from '@react-three/drei';
+import { Float } from '@react-three/drei';
 import * as THREE from 'three';
 
 const HeartShape = (props: any) => {
@@ -41,10 +41,10 @@ const HeartShape = (props: any) => {
         <extrudeGeometry args={[shape, { depth: 0.2, bevelEnabled: true, bevelSegments: 2, steps: 2, bevelSize: 0.1, bevelThickness: 0.1 }]} />
         <meshStandardMaterial 
           color={props.color} 
-          roughness={0.3} 
-          metalness={0.1}
+          roughness={0.2} 
+          metalness={0.5}
           emissive={props.color}
-          emissiveIntensity={0.2}
+          emissiveIntensity={0.1}
         />
       </mesh>
     </Float>
@@ -71,10 +71,12 @@ export const Scene3D: React.FC = () => {
 
   return (
     <div className="fixed inset-0 z-0 pointer-events-none">
-      <Canvas camera={{ position: [0, 0, 12], fov: 50 }}>
-        <ambientLight intensity={0.5} />
-        <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={1} />
-        <pointLight position={[-10, -10, -10]} intensity={0.5} color="#ff0000" />
+      <Canvas camera={{ position: [0, 0, 12], fov: 50 }} gl={{ alpha: true }}>
+        {/* Adjusted lights since we removed the Environment map */}
+        <ambientLight intensity={0.8} />
+        <spotLight position={[10, 10, 10]} angle={0.3} penumbra={1} intensity={1.5} color="#fff0f5" />
+        <pointLight position={[-10, -5, -10]} intensity={1} color="#ffb6c1" />
+        <directionalLight position={[0, 5, 5]} intensity={1} color="#fff" />
         
         {hearts.map((h) => (
           <HeartShape 
@@ -86,7 +88,7 @@ export const Scene3D: React.FC = () => {
           />
         ))}
         
-        <Environment preset="sunset" />
+        {/* Removed <Environment /> entirely to guarantee transparent background */}
       </Canvas>
     </div>
   );
