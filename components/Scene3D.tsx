@@ -22,7 +22,6 @@ const HeartShape = (props: any) => {
 
   useFrame((state) => {
     if (meshRef.current) {
-      // Add some random phase to rotation so they don't all look identical
       meshRef.current.rotation.y += 0.01 * props.speed;
       meshRef.current.rotation.z = Math.sin(state.clock.elapsedTime * props.speed + props.position[0]) * 0.1;
     }
@@ -52,15 +51,14 @@ const HeartShape = (props: any) => {
 };
 
 export const Scene3D: React.FC = () => {
-  // Generate many hearts
   const heartCount = 40;
   const hearts = useMemo(() => {
     const colors = ['#ef4444', '#ec4899', '#db2777', '#f43f5e', '#be123c', '#fda4af'];
     return new Array(heartCount).fill(0).map((_, i) => ({
       position: [
-        (Math.random() - 0.5) * 25, // x spread
-        (Math.random() - 0.5) * 20, // y spread
-        (Math.random() - 0.5) * 15 - 5 // z spread (mostly behind)
+        (Math.random() - 0.5) * 25,
+        (Math.random() - 0.5) * 20,
+        (Math.random() - 0.5) * 15 - 5
       ] as [number, number, number],
       scale: 0.3 + Math.random() * 0.7,
       speed: 0.5 + Math.random() * 2,
@@ -72,7 +70,6 @@ export const Scene3D: React.FC = () => {
   return (
     <div className="fixed inset-0 z-0 pointer-events-none">
       <Canvas camera={{ position: [0, 0, 12], fov: 50 }} gl={{ alpha: true }}>
-        {/* Adjusted lights since we removed the Environment map */}
         <ambientLight intensity={0.8} />
         <spotLight position={[10, 10, 10]} angle={0.3} penumbra={1} intensity={1.5} color="#fff0f5" />
         <pointLight position={[-10, -5, -10]} intensity={1} color="#ffb6c1" />
@@ -87,8 +84,6 @@ export const Scene3D: React.FC = () => {
             color={h.color} 
           />
         ))}
-        
-        {/* Removed <Environment /> entirely to guarantee transparent background */}
       </Canvas>
     </div>
   );
